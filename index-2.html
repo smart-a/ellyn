@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Page Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/all.css">
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/bootstrap.bundle.js"></script>
+        <script src="js/all.js"></script>
+
+        <style>
+            .scrollable {
+                overflow: auto; 
+                -ms-overflow-style: none;
+            }
+            .scrollable::-webkit-scrollbar { 
+                display:none;
+            }
+            .item-info{
+                cursor: pointer;
+            }
+            .item-amount::before{
+                content: "\20A6";
+                font-weight:bold;
+            }
+            .item-name{
+                color: #6c757d;
+            }
+            .card-image-sm{
+                width: 150px;
+                height: 150px;
+            }
+            .card-image-md{
+                width: 300px;
+                height: 300px;
+            }
+            .card-image-lg{
+                width: 350px;
+                height: 350px;
+            }
+
+            .item-card {
+                position: relative;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                min-width: 0;
+                word-wrap: break-word;
+                background-color: #fff;
+                background-clip: border-box;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                border-radius: 0.25rem;
+            }
+            .item-card-body {
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+                min-height: 1px;
+                padding: 1.25rem;
+            }
+            .item-card-header {
+                padding: 0.75rem 1.25rem;
+                margin-bottom: 0;
+                background-color: rgba(0, 0, 0, 0.03);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+            }
+            .item-card-header:first-child {
+                border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+            }
+
+            .cart{
+                font-size:0.6em; 
+                position: absolute; 
+                right: 10px ;
+            }
+
+            
+
+        </style>
+    </head>
+        <body>
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark shadow sticky-top">
+                <a href="#" class="navbar-brand"><h2>Ellyn</h2></a>
+               
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#my-nav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="my-nav" >
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-home"></i>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Help</a>
+                        </li>
+                    </ul>
+    
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link dropdown">
+                                <i class="fa fa-avatar"></i>
+                                Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                                <i class="fa fa-shopping-cart cart-icon" style="color:white; font-size: 2rem"></i>
+                                <span class="badge badge-pill bg-danger cart">0</span>
+                        </li>
+                    </ul>
+                </div>
+
+                
+
+                <!--
+                
+                -->
+            </nav>
+
+            <div class="container mt-5">
+
+                    <div class="alert alert-primary shadow" role="alert" alert-dismissible>
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        
+                        Primary alert
+                    </div>
+                    <div class="alert alert-info shadow">
+                        <h4 class="alert-heading"><i class="fa fa-info">Head</i></h4>
+                    </div>
+
+                <div class="row">
+                    <div class="col">
+                        Email or Phone
+                    </div>
+                    <div class="col">
+                        Password
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col form-group">
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="col form-group">
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-success">Log in</button>
+                    </div>
+                </div>
+
+                <div class="list-group  list-group-horizontal mb-3 scrollable">
+                    
+                    <a class="list-group-item list-group-item-action">
+                        <div class="card mb-2">
+                            <div class="card-header bg-danger">
+                                New selling 
+                                <span class="badge badge-primary">New</span>
+                            </div>
+                            <div class="card-body">
+                                <pre>
+                                    ljkdfjbkfd
+                                    fwe
+                                    fefaeff
+                                    fwffa
+                                </pre>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="list-group-item list-group-item-action">
+                        <div class="card mb-2">
+                            <div class="card-header bg-primary">
+                                Best selling items
+                                <span class="badge badge-pill badge-danger">NEW</span>
+                            </div>
+                            <div class="card-body">
+                                <pre>
+                                    ljkdfjbkfd
+                                    fwe
+                                    fefaeff
+                                    fwffa
+                                </pre>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="list-group-item list-group-item-action">
+                        <div class="card mb-2">
+                            <div class="card-header bg-secondary">
+                                Ladies selling items
+                                <span class="badge badge-pill badge-warning">NEW</span>
+                            </div>
+                            <div class="card-body">
+                                <pre>
+                                    ljkdfjbkfd
+                                    fwe
+                                    fefaeff
+                                    fwffa
+                                </pre>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="list-group-item list-group-item-action">
+                        <div class="card mb-2">
+                            <div class="card-header bg-success">
+                                Ladies selling items
+                                <span class="badge badge-pill badge-primary">NEW</span>
+                            </div>
+                            <div class="card-body">
+                                <pre>
+                                    ljkdfjbkfd
+                                    fwe
+                                    fefaeff
+                                    fwffa
+                                </pre>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!--FLEX-->
+                <div class="item-card mb-3">
+                    <div class="item-card-header shadow bg-warning">
+                        Best selling
+                    </div>
+                    
+                    <div class="item-card-body">
+                        <div class="list-group list-group-horizontal">
+                            <div class="list-group-item " data-id="amotekun">
+                                    <div class="item-info" data-toggle="modal" data-target="#item-modal">
+                                            <img src="image/dp1.jpg" class=" card-image-md"/>
+                                            <h4 class="item-name">Amoteku</h4>
+                                            <span class="item-amount">80,000</span>
+                                            
+                                        </div>
+                                    </div>
+                            <div class="list-group-item " data-id="pal">
+                                <div class="item-info">
+                                        <img src="image/img-2.jpg" class=" card-image-md"/>
+                                        <h4 class="item-name">pal</h4>
+                                        <span class="item-amount">80,000</span>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Item Modal-->
+                <div class="modal fade" id="item-modal">
+                    <div class="modal-dialog modal-md modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span type="button" class="close btn-danger" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="item-info">
+                                        <img src="image/img-2.jpg" class=" card-image-md"/>
+                                        <h4 class="item-name">pal</h4>
+                                        <span class="item-amount">80,000</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <ul>
+                                        <li>Size</li>
+                                        <li>Color</li>
+                                    </ul>
+                                </div>
+                                <p class="mt-2 ">
+                                    <button type="button" class="btn btn-success ml-3 add-cart">
+                                            <i class="fa fa-cart-plus"></i>
+                                            <span>Add to cart</span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary ml-2">
+                                            <i class="fa fa-heart"></i>
+                                            Save
+                                        </button>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                
+
+                <div class="mb-2">
+                        <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="cb"/> 
+                                <label class="custom-control-label" for="cb">Click to check</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="rd"/> 
+                                <label class="custom-control-label" for="rd">Click to check</label>
+                        </div>
+                        
+                        <select class="custom-select">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+    
+                        <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="ch1"/> 
+                                <label class="custom-control-label" for="ch1">Click to check</label>
+                        </div>
+    
+                        <input class="nav-priamry" type="number" id="item-num" value="0" min="0" style="width:10px"/>
+                </div>
+
+                
+            <div class="alert alert-success shadow p-3 mb-5" role="alert">Success alert!</div>
+
+            <div class="shadow p-3 mb-5 bg-light rounded">
+                Regular shadow
+                <i class="fa fa-home"></i>
+            </div>
+
+            <div class="form-group">
+                <select multiple class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+            
+            <section class="mb-3">
+                <div class="form-row">
+                    <div class="col-sm-2"><label>Email or Phone</label></div>
+                    <div class="col-sm-2"><label>Password</label></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-sm-2">
+                        <input type="email" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="password" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-sm-2"><input type="submit" value="Log In" class="btn btn-sm btn-primary"></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-2"><a href="#" class="text-decoration-none ">Forget Password?</a></div>
+                </div>
+            </section>
+
+            <div class="input-group mb-3" >
+                <input type="text" class="form-control"/>
+                <div class="input-group-append">
+                    <input type="button" class="btn btn-success" value="Click"/>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button class="dropdown btn btn-secondary" data-toggle="dropdown">
+                    Click
+                    <span class=""></span>
+                </button> 
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                        Item 1
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Item 2
+                    </a>
+                </div>
+            </div>
+
+            <h4>Breadcrumb</h4>
+            <nav aria-label="breadcrumb mb-5">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item active" aria-current="page">Home</li>
+                  <li class="breadcrumb-item " aria-current="page">Account</li>
+                  <li class="breadcrumb-item " aria-current="page">Help</li>
+                </ol>
+            </nav>
+            
+            <h4>Toolbar</h4>
+            <div class="btn-toolbar mb-4" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-3" role="group" aria-label="First group">
+                  <button type="button" class="btn btn-secondary">1</button>
+                  <button type="button" class="btn btn-secondary">2</button>
+                  <button type="button" class="btn btn-secondary">3</button>
+                </div>
+                <div class="btn-group mr-3" role="group" aria-label="Second group">
+                  <button type="button" class="btn btn-secondary">5</button>
+                  <button type="button" class="btn btn-secondary">6</button>
+                </div>
+                <div class="btn-group mr-3" role="group" aria-label="Third group">
+                  <button type="button" class="btn btn-secondary">8</button>
+                </div>
+              </div>
+
+            <input id="color" class="form-control" type="color"/>
+
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#myModal">
+                Open Modal
+            </button>
+
+            <!--Modal-->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <!--modal header-->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Open</h4>
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+
+                        <!--modal body-->
+                        <div class="modal-body">
+                            <h4>Modal Body</h4>
+                            <div class="carousel slide" data-ride="carousel" id="itemImg">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item item active">
+                                            <img class="my-img" src=""/>
+                                    </div>
+                                </div>
+                                <!--Control-->
+                                <a href="#itemImg" class="carousel-control-prev" data-slide="prev">
+                                    <span class="carousel-control-prev-icon  navbar-dark"></span>
+                                </a>
+                                <a href="#itemImg" class="carousel-control-next" data-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </a>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="myfile">
+                                <label for="myfile" class="custom-file-label">Choose file</label>
+                            </div>
+                            <input type="button" id="btn-load" class="btn btn-success mt-1 float-right" value="Load"/>
+                        </div>
+
+                        <!--modal footer-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                        
+
+                    </div>
+                </div>
+            </div>  
+        </div>
+
+
+            <script>
+
+                $(".list-group-item").on("click", function(){
+                   var id = $(this).attr("data-id");
+                   //alert("ID: " + id); 
+                });
+
+
+                $(".add-cart").on("click",function(){
+                    var count = $(".cart").text();
+                    var n = 0;
+
+                    if($(this).hasClass("add-cart")){
+                        n = parseInt(count) + 1;
+                        $(this).addClass("disabled remove-cart").removeClass("add-cart")
+                        $(".add-cart span").text("Remove");
+                        $(this).siblings("i").removeClass("fa-cart-plus").addClass("fa-trash")
+                    }
+                    else{
+                        n = parseInt(count) - 1;
+                        $(this).addClass("add-cart").removeClass("disabled remove-cart")
+                        $(".add-cart span").text("Add to Cart");
+                        $(this).siblings("i").removeClass("fa-trash").addClass("fa-cart-plus")
+                    }
+                    $(".cart").text(n);
+                });
+            </script>
+
+    </body>
+</html>

@@ -1,0 +1,82 @@
+  <!--Item Modal-->
+  <?php
+        require('classify.php');
+
+  ?>
+
+
+<section>
+
+    <nav aria-label="breadcrumb mt-3 mb-5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page">Home</li>
+            <li class="breadcrumb-item" aria-current="page">Item Classification</li>
+            <li class="breadcrumb-item active" aria-current="page">Brand</li>
+        </ol>
+    </nav>
+    <div class="container-sm">
+
+        <button type="button" class="btn btn-success mt-2 mb-2 add-brand">
+            <i class="fa fa-plus"></i> 
+            Add New
+        </button>
+        <table class="table table-bordered table-hover brand-table " style="max-width:50%;">
+            <thead class="bg-dark" style="color:white">
+                <tr>
+                    <th>S/No</th>
+                    <th>Brand </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $query = fetch_brand();
+                    $c = 1;
+                    while($row = mysqli_fetch_assoc($query)){
+                        echo "<tr class='".$row['brand_id']."'>".
+                            "<td>".$c."</td>".
+                            "<td>".$row['item_brand']."</td>".
+                            "<td>
+                                <button type='button' class='btn btn-sm btn-primary mr-2 brand-edit' brand-id='".$row['brand_id']."' data-toggle='tooltip' title='Edit'>
+                                    <i class='fa fa-edit'></i>
+                                </button>
+                                <button type='button' class='btn btn-sm btn-danger brand-delete' brand-id='".$row['brand_id']."' data-toggle='tooltip' title='Delete'>
+                                    <i class='fa fa-trash'></i>
+                                </button>
+                            </td></tr>";
+                            $c++;
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="add-brand" brand-id="" action="" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-caption">Add New</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body p-4">
+                    <form enctype="multipart/form-data" method="POST" action="" id="item_form">
+                        <input type="hidden" id="action" name="action">
+                        <input type="hidden" id="brand_id" name="brand_id">
+                        <div class="row">
+                            <div class="col-sm form-group">
+                                <label>Brand name:</label>
+                                <input type="text" class="form-control" id="item_brand" name="item_brand" maxlength="20">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" value="clicked" class="btn btn-primary mr-2" id="save" name="save">
+                        <i class="fa fa-download"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

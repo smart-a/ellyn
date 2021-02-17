@@ -1,0 +1,118 @@
+<section class="d-none account-opt" id="acct-details">
+    <nav aria-label="breadcrumb mt-3 mb-5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item " aria-current="page">Account Settings</li>
+            <li class="breadcrumb-item active" aria-current="page">Details</li>
+        </ol>
+    </nav>
+   <div class="container-sm mt-3 mb-5">
+      <div class="card mb-3" style="width:450px;margin:0 auto;">
+          <div class="card-body" >
+            <h5 class="text-center mb-3" style="font-size:1.5rem;">Account details</h5>
+
+              <div class="alert alert-primary shadow mb-4 msg-alert">
+                  <a class="close ml-2" data-dismiss="alert" aria-label="close">&times;</a>
+                  <i class="fa fa-exclamation-triangle" style="color:red"></i><span>Error</span>
+              </div>
+
+              <form id="account_form" method="POST" action="account_backend.php" style="font-size: 1rem;">
+                  <div class="row delivery-row">
+                      <input type="hidden" name="action" value="update"/>
+                      <div class="col-sm">
+                          <label>Fullname:</label>
+                          <div class="input-group">
+                              <input type="text" class="form-control" disabled id="fullname" name="fullname" value="<?php echo $user['fullname'] ?>"/>
+                              <div class="input-group-append edit-input " data-id="fullname">
+                                 <span class="input-group-text"><i class="fa fa-edit"></i></span>
+                              </div>
+                           </div>
+                      </div>
+                  </div>
+                  <div class="row delivery-row">
+                      <div class="col-sm">
+                          <label>Country/ Region:</label>
+                          <div class="input-group">
+                              <select class="custom-select" disabled id="country" name="country" option="<?php echo $user['country'] ?>">
+                                 <option selected>Nigeria</option>
+                              </select>
+                              <div class="input-group-append edit-input" data-id="country">
+                                 <span class="input-group-text"><i class="fa fa-edit"></i></span>
+                              </div>
+                           </div>
+                      </div>
+                  </div>
+                  <div class="row delivery-row">
+                      <div class="col-sm">
+                          <label>Street address:</label>
+                          <div class="input-group">
+                            <input type="text" class="form-control" disabled id="address" name="address" value="<?php echo $user['address'] ?>"/>
+                            <div class="input-group-append edit-input" data-id="address">
+                               <span class="input-group-text"><i class="fa fa-edit"></i></span>
+                            </div>
+                         </div>
+                      </div>
+                  </div>
+                  <div class="row delivery-row">
+                      <div class="col-sm">
+                          <label>State:</label>
+                          <div class="input-group">
+                            <select class="custom-select" disabled id="state" name="state" option="<?php echo $user['state']?>">
+                                <option value="" disabled selected>Select option</option>
+                                <option value="Kaduna">Kaduna</option>
+                            </select>
+                            <div class="input-group-append edit-input" data-id="state">
+                               <span class="input-group-text"><i class="fa fa-edit"></i></span>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="col-sm">
+                          <label>City/ Town:</label>
+                          <div class="input-group">
+                            <select class="custom-select" disabled id="city" name="city" option="<?php echo $user['city']?>">
+                                <option value="" disabled selected>Select option</option>
+                                <option value="Kaduna North">Kaduna North</option>
+                            </select>
+                            <div class="input-group-append edit-input" data-id="city">
+                               <span class="input-group-text"><i class="fa fa-edit"></i></span>
+                            </div>
+                         </div>
+                      </div>
+                  </div>
+                  <div class="row delivery-row">
+                      <div class="col-sm">
+                            <label>Phone:</label>
+                            <div class="input-group">
+                                <input type="tel" disabled class="form-control" id="phone" name="phone" value="<?php echo $user['phone'] ?>"/>
+                                <div class="input-group-append edit-input" data-id="phone">
+                                    <span class="input-group-text"><i class="fa fa-edit"></i></span>
+                                </div>
+                            </div>
+                      </div>
+                  </div>
+                  <div class="row delivery-row">
+                      <div class="col-sm">
+                          <label>Email:</label>
+                          <div class="input-group">
+                            <input type="email" disabled class="form-control" id="email" name="email" value="<?php echo $user['email'] ?>"/>
+                            <div class="input-group-append edit-input" data-id="email">
+                            <span class="input-group-text"><i class="fa fa-edit"></i></span>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row delivery-row mt-4">
+                      <div class="col-sm">
+                          <input type="hidden" class="username" name="username"/>
+                          <input type="hidden" class="password" name="password"/>
+                          <button type="button" class="btn btn-block btn-outline-success" id="update">
+                              <span class="sp"></span>
+                                  Update
+                          </button>
+                      </div>
+                  </div>
+              </form>
+              
+          </div>
+      </div>
+  </div>
+</section>     

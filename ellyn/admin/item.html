@@ -1,0 +1,281 @@
+  <!--Item Modal-->
+<?php
+    require('items_backend.php');
+    if(empty($page_row))
+        $page_row = 10;
+    $pg = '';
+    if(!empty($limit))
+        $pg = ((explode(',',$limit)[0])/$page_row)+1;
+    else{
+        $limit = '0,'.$page_row;
+        $pg = (explode(',',$limit)[0])/$page_row+1;
+    }
+                
+?>
+
+
+<section>
+
+    <nav aria-label="breadcrumb mt-3 mb-5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item " aria-current="page">Home</li>
+            <li class="breadcrumb-item active" aria-current="page">Items</li>
+        </ol>
+    </nav>
+    <div class="container-fluid pl-5 pr-5 pb-5">
+
+        <button type="button" class="btn btn-success mt-2 mb-3 add-item">
+            <i class="fa fa-plus"></i> 
+            Add Item
+        </button>
+        <div class="row m-0 mb-2">
+            <div class="col-sm-2">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend" onclick="javascript:$('#search').focus()">
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input type="search" class="form-control" id="search"/>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <select class="custom-select custom-select-sm" id="item_row" name="item_row">
+                    <option value="5" <?php echo ($page_row==5)?'selected':'' ?> >5 rows</option>
+                    <option value="10" <?php echo ($page_row==10)?'selected':'' ?> >10 rows</option>
+                    <option value="20" <?php echo ($page_row==20)?'selected':'' ?> >20 rows</option>
+                    <option value="30" <?php echo ($page_row==30)?'selected':'' ?> >30 rows</option>
+                </select>
+            </div>
+            <div class="col overflow-hidden" style="white-space: nowrap;">
+                <ul class="pagination pagination-sm  item-limit d-flex flex-wrap">
+                    <?php
+                        $total_row = get_items_num("");
+                        $limit_page = ceil($total_row / $page_row);
+                        $html = '<li class="page-item page-item-opt opt-prev" total-row="'.$limit_page.'">
+                                    <a class="page-link" limit="1"><i class="fa fa-angle-left"></i></a>
+                                </li>';
+                        
+                        $next = '';
+                        //echo 'Limit: '.$limit.' pg:'.$pg.' page_limit: '.$page_row;
+                        for($i=1; $i<=$limit_page; $i++){
+                            $active = "";
+                            if($pg==''){
+                                if($i==1){
+                                    $active = "active"; //"item-selected";
+                                    $next = ($i<$limit_page)?$i+1:$i;
+                                 }
+                            }
+                            else{
+                                if($i==$pg){
+                                    $active = "active"; //"item-selected";
+                                    $next = ($i<$limit_page)?$i+1:$i;
+                                 }
+                            }
+                            
+                            
+                            $html .= '<li class="page-item page-item-opt '.$active.'" total-row="'.$limit_page.'">
+                                        <a class="page-link " limit="'.$i.'">'.$i.'</a>
+                                    </li>';
+                        }
+                        $html .= '<li class="page-item page-item-opt opt-next" total-row="'.$limit_page.'">
+                                    <a class="page-link" limit="'.$next.'"><i class="fa fa-angle-right"></i></a>
+                                </li>';
+
+                        echo $html;
+                    ?>
+                </ul>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover table-responsive-md item-table">
+            <thead class="bg-dark" style="color:white;">
+                <tr>
+                    <th>S/No</th>
+                    <th>Category 
+                        <a class="sort ASC" data-sort="item_category"> <i class="fa fa-sort-alpha-down"></i></a>
+                    </th>
+                    <th>Sub-Category
+                        <a class="sort ASC" data-sort="item_subcat"> <i class="fa fa-sort-alpha-down"></i></a>
+                    </th>
+                    <th>Brand
+                        <a class="sort ASC" data-sort="item_brand"> <i class="fa fa-sort-alpha-down"></i></a>
+                    </th>
+                    <th>Item Description</th>
+                    <th>Qty
+                        <a class="sort ASC" data-sort="item_qty"> <i class="fa fa-sort-numeric-down"></i></a>
+                    </th>
+                    <th>Amount
+                        <a class="sort ASC" data-sort="item_amount"> <i class="fa fa-sort-amount-down"></i></a>
+                    </th>
+                    <th>Size
+                        <a class="sort ASC" data-sort="item_size"> <i class="fa fa-sort-alpha-down"></i></a>
+                    </th>
+                    <th>Color
+                        <a class="sort ASC" data-sort="item_color"> <i class="fa fa-sort-alpha-down"></i></a>
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $query = fetch_items($limit);
+                    $c = 1;
+                    while($row = mysqli_fetch_assoc($query)){
+                        echo "<tr class='".$row['item_id']."'>".
+                            "<td>".$c."</td>".
+                            "<td>".$row['item_category']."</td>".
+                            "<td>".$row['item_subcat']."</td>".
+                            "<td>".$row['item_brand']."</td>".
+                            "<td>".$row['item_name']."</td>".
+                            "<td>".$row['item_qty']."</td>".
+                            "<td><span class='item-amount'>".number_format($row['item_amount'],2)."</span></td>".
+                            "<td>".$row['item_size']."</td>".
+                            "<td>".$row['item_color']."</td>".
+                            "<td>
+                                <button type='button' class='btn btn-sm btn-primary mr-2 item-edit' item-id='".$row['item_id']."' data-toggle='tooltip' title='Edit'>
+                                    <i class='fa fa-edit'></i>
+                                </button>
+                                <button type='button' class='btn btn-sm btn-danger item-delete' item-id='".$row['item_id']."'' data-toggle='tooltip' title='Delete'>
+                                    <i class='fa fa-trash'></i>
+                                </button>
+                            </td></tr>";
+                            $c++;
+                    }
+                ?>
+            </tbody>
+        </table>
+        <div class="page_num mb-2"><?php echo "Page: 1 of ".$limit_page ?></div>
+    </div>
+
+    <div class="modal fade" id="add-item" item-id="" action="" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-caption">Add Item</h4>
+                    <button type="button" class="close close-item">&times;</button>
+                </div>
+                <div class="modal-body p-4">
+                    <form enctype="multipart/form-data" method="POST" action="" id="item_form">
+                        <input type="hidden" id="item_id" name="item_id">
+                        <input type="hidden" id="action" name="action">
+                        <input type="hidden" id="limit" name="limit" value="">
+                        <input type="hidden" id="page_row" name="page_row" value="">
+                        <div class="row head-row mb-2">
+                            <div class="col-sm-4 new_item collapse">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="new_item" name="new_item"/> 
+                                    <label class="custom-control-label" for="new_item">New arrival?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2 ">
+                            <div class="col-sm form-group">
+                                <label>Item Name:</label>
+                                <input type="text" class="form-control" id="item_name" name="item_name">
+                            </div>
+                            <div class="col-sm-5">
+                                <label>Brand:</label>
+                                <select class="custom-select" id="item_brand" name="item_brand">
+                                    <option selected disabled value="">Please select option</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm">
+                                <label>Category:</label>
+                                <select class="custom-select" id="item_category" name="item_category">
+                                    <option selected disabled value="">Please select option</option>
+                                </select>
+                            </div>
+                            <div class="col-sm">
+                                <label>Sub-Category:</label>
+                                <select class="custom-select" id="item_subcat" name="item_subcat">
+                                    <option selected disabled value="">Please select option</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm form-group">
+                                <label>
+                                    Amount:
+                                    <input type="text" class="form-control" id="item_amount" name="item_amount"/>
+                                </label>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>
+                                    Quantity:
+                                    <input type="number" class="p-0 item-num" value="1" min="1" id="item_qty" name="item_qty" />
+                                </label>
+                                
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm form-group">
+                                <label class="d-block">
+                                    Size: 
+                                    <div class="border rounded">
+                                        <select class="d-block size-alpha" multiple id="item_size" name="item_size[]">
+                                            <option value="S">S</option>
+                                            <option value="M"">M</option>
+                                            <option value="L">L</option>
+                                            <option value="XL">XL</option>
+                                            <option value="XXL">XXL</option>
+                                            <option value="XXXL">XXXL</option>
+                                        </select>
+                                        <a class="btn btn-sm btn-success toggle-size float-right mt-1 mr-1" data-toggle='tooltip' title='Change Size'>
+                                            <i class="fa fa-tape" style="color:white"></i>
+                                        </a>
+                                    </div>
+                                </label>
+                                
+                            </div>
+                            <div class="col-sm form-group">
+                                <label class="d-block">
+                                    Color:
+                                    <div class="border rounded">
+                                        <select class="d-block" multiple id="item_color" name="item_color[]">
+                                            <option>Blue</option>
+                                            <option>Black</option>
+                                            <option>Green</option>
+                                            <option>Red</option>
+                                            <option>White</option>
+                                            <option>Yellow</option>
+                                            <option>Purple</option>
+                                        </select>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm form-group">
+                                <label>Display Image:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend ">
+                                        <button type="button" class="btn btn-success add-item-img">
+                                            <i class="fa fa-file-medical"></i>
+                                        </button>
+                                    </div>
+                                    <div class="custom-file item-img">
+                                        <input type="file" class="custom-file-input overflow-hidden" id="item_img" name="item_img[]">
+                                        <label for="item_img" class="custom-file-label overflow-hidden">Choose file</label>
+                                    </div>
+                                </div>
+                                </div>
+                            <div class="col-sm form-group">
+                                <label>
+                                    Preview:
+                                    <div class="list-group list-group-horizontal d-flex flex-wrap img-preview border-info">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary mr-2" id="save" name="save">
+                        <i class="fa fa-download"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

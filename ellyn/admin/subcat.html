@@ -1,0 +1,92 @@
+  <!--Item Modal-->
+  <?php
+        require('classify.php');
+
+  ?>
+
+
+<section>
+
+    <nav aria-label="breadcrumb mt-3 mb-5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page">Home</li>
+            <li class="breadcrumb-item" aria-current="page">Item Classification</li>
+            <li class="breadcrumb-item active" aria-current="page">Sub-Category</li>
+        </ol>
+    </nav>
+    <div class="container-sm">
+
+        <button type="button" class="btn btn-success mt-2 mb-2 add-subcat">
+            <i class="fa fa-plus"></i> 
+            Add New
+        </button>
+        <table class="table table-bordered table-hover category-table " style="max-width:50%;">
+            <thead class="bg-dark" style="color:white">
+                <tr>
+                    <th>S/No</th>
+                    <th>Category</th>
+                    <th>Sub-Category</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $query = fetch_subcat();
+                    $c = 1;
+                    while($row = mysqli_fetch_assoc($query)){
+                        echo "<tr class='".$row['subcat_id']."'>".
+                            "<td>".$c."</td>".
+                            "<td>".$row['item_category']."</td>".
+                            "<td>".$row['item_subcat']."</td>".
+                            "<td>
+                                <button type='button' class='btn btn-sm btn-primary mr-2 subcat-edit' subcat-id='".$row['subcat_id']."' data-toggle='tooltip' title='Edit'>
+                                    <i class='fa fa-edit'></i>
+                                </button>
+                                <button type='button' class='btn btn-sm btn-danger subcat-delete' subcat-id='".$row['subcat_id']."' data-toggle='tooltip' title='Delete'>
+                                    <i class='fa fa-trash'></i>
+                                </button>
+                            </td></tr>";
+                            $c++;
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="add-subcat" subcat-id="" action="" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-caption">Add New</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body p-4">
+                    <form enctype="multipart/form-data" method="POST" action="" id="item_form">
+                        <input type="hidden" id="action" name="action">
+                        <input type="hidden" id="subcat_id" name="subcat_id">
+                        <div class="row">
+                            <div class="col-sm form-group">
+                                <label>Category:</label>
+                                <select class="custom-select" id="item_category" name="item_category">
+                                    <option selected disabled value="">Please select option</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm form-group">
+                                <label>Sub-Category name:</label>
+                                <input type="text" class="form-control" id="item_subcat" name="item_subcat" maxlength="20">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" value="clicked" class="btn btn-primary mr-2" id="save" name="save">
+                        <i class="fa fa-download"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
